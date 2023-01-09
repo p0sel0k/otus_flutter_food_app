@@ -14,10 +14,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Рецепты',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-            .copyWith(secondary: const Color.fromRGBO(46, 204, 113, 1)),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blue,
+        ).copyWith(
+          secondary: const Color.fromRGBO(46, 204, 113, 1),
+        ),
       ),
-      home: const RecipesListPage(),
+      home: RecipesListPage.create(),
     );
   }
 }

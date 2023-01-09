@@ -3,5 +3,9 @@ class Recipe {
   final String time;
   final String imgPath;
 
-  const Recipe(this.title, this.time, this.imgPath);
+  const Recipe({
+    required this.title,
+    required this.time,
+    required this.imgPath,
+  });
 }
