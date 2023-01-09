@@ -17,6 +17,7 @@ class RecipesListPage extends StatelessWidget {
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
+          fixedColor: const Color.fromRGBO(46, 204, 113, 1),
           items: const [
             BottomNavigationBarItem(
               label: 'Рецепты',

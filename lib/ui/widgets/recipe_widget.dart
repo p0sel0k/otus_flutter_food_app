@@ -66,7 +66,7 @@ class RecipeWidget extends StatelessWidget {
                       Image(
                         image: AssetImage('assets/images/${recipe.state.img}'),
                       ),
-                      const Padding(padding: EdgeInsets.all(16.0)),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,10 +77,13 @@ class RecipeWidget extends StatelessWidget {
                                 recipe.state.title,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                                style: const TextStyle(fontSize: 22),
+                                style: const TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 13),
                             Row(
                               children: [
                                 const Icon(Icons.schedule),
@@ -96,6 +99,7 @@ class RecipeWidget extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const SizedBox(width: 23),
                     ],
                   ),
                 )
