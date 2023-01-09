@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: const Color.fromRGBO(46, 204, 113, 1)),
       ),
-      home: const RecipesListWidget(),
+      home: const RecipesListPage(),
     );
   }
 }

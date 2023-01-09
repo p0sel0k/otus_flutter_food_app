@@ -67,25 +67,34 @@ class RecipeWidget extends StatelessWidget {
                         image: AssetImage('assets/images/${recipe.state.img}'),
                       ),
                       const Padding(padding: EdgeInsets.all(16.0)),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(padding: EdgeInsets.only(top: 30)),
-                          Text(recipe.state.title,
-                              style: const TextStyle(fontSize: 22)),
-                          const Padding(padding: EdgeInsets.all(5)),
-                          Row(
-                            children: [
-                              const Icon(Icons.schedule),
-                              const Padding(
-                                  padding: EdgeInsets.only(right: 11)),
-                              Text(recipe.state.time,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Color.fromRGBO(46, 204, 113, 1))),
-                            ],
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 30),
+                            Flexible(
+                              child: Text(
+                                recipe.state.title,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                style: const TextStyle(fontSize: 22),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(Icons.schedule),
+                                const Padding(
+                                    padding: EdgeInsets.only(right: 11)),
+                                Text(recipe.state.time,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color:
+                                            Color.fromRGBO(46, 204, 113, 1))),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
