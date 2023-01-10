@@ -1,17 +1,13 @@
-import 'package:flutter/services.dart';
+import 'package:hw2/domain/services/recipes_list_service.dart';
 
 import '../entities/recipe.dart';
-import 'dart:convert';
 
 class RecipeDataProvider {
-  Future<List> _readJson() async {
-    final String recipes = await rootBundle.loadString('assets/recipes.json');
-    return json.decode(recipes)['recipes'];
-  }
+  final RecipesListService recipesListService;
 
-  Future<Recipe> load(int index) async {
-    var recipes = await _readJson();
-    Map<String, dynamic> curr = recipes[index];
-    return Recipe(curr["title"] ?? '', curr["time"] ?? '', curr["image"] ?? '');
+  const RecipeDataProvider({required this.recipesListService});
+
+  Recipe load(int index) {
+    return recipesListService.recipes[index];
   }
 }
