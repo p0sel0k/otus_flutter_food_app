@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hw2/domain/services/recipe_service.dart';
-import 'package:hw2/domain/services/recipes_list_service.dart';
+import 'package:hw2/features/recipes_list/application/recipe_service.dart';
+import 'package:hw2/features/recipes_list/application/recipes_list_service.dart';
 import 'package:provider/provider.dart';
 
 class _RecipeState {

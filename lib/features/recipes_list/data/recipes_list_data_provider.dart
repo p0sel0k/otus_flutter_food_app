@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:hw2/domain/entities/recipe.dart';
+import 'package:hw2/features/recipes_list/domain/recipe.dart';
 
 class RecipesListDataProvider {
   Future<List> _readJson() async {

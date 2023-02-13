@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hw2/ui/widgets/recipes_list_widget.dart';
+import 'package:hw2/features/recipes_list/presentation/recipes_list_page.dart';
 
 void main() {
   runApp(const MyApp());
