@@ -1,6 +1,6 @@
-import 'package:hw2/domain/data_providers/recipe_data_provider.dart';
-import 'package:hw2/domain/entities/recipe.dart';
-import 'package:hw2/domain/services/recipes_list_service.dart';
+import 'package:hw2/features/recipes_list/data/recipe_data_provider.dart';
+import 'package:hw2/features/recipes_list/domain/recipe.dart';
+import 'package:hw2/features/recipes_list/application/recipes_list_service.dart';
 
 class RecipeService {
   late RecipeDataProvider recipeDataProvider;

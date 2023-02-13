@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hw2/domain/entities/recipe.dart';
-import 'package:hw2/domain/services/recipes_list_service.dart';
-import 'package:hw2/ui/widgets/recipe_widget.dart';
+import 'package:hw2/features/recipes_list/domain/recipe.dart';
+import 'package:hw2/features/recipes_list/application/recipes_list_service.dart';
+import 'package:hw2/features/recipes_list/presentation/recipe_widget.dart';
 import 'package:provider/provider.dart';
 
 class _RecipesListViewModel extends ChangeNotifier {
