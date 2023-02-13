@@ -1,63 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:hw2/features/recipes_list/application/recipe_service.dart';
-import 'package:hw2/features/recipes_list/application/recipes_list_service.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hw2/features/recipe/application/recipe_element_service.dart';
+import 'package:hw2/features/recipe/presentation/recipes_list_page/recipe_element_controller.dart';
 
-class _RecipeState {
-  final String title;
-  final String time;
-  final String img;
-
-  _RecipeState({
-    required this.title,
-    required this.time,
-    required this.img,
-  });
-}
-
-class _RecipeViewModel extends ChangeNotifier {
-  late _RecipeState _state;
-  late RecipeService recipeService;
-
-  _RecipeState get state => _state;
-
-  _RecipeViewModel({
-    required int index,
-    required RecipesListService recipesListService,
-  }) {
-    recipeService = RecipeService(
-      index: index,
-      recipesListService: recipesListService,
-    );
-    var recipe = recipeService.recipe;
-    _state = _RecipeState(
-      title: recipe.title,
-      img: recipe.imgPath,
-      time: recipe.time,
-    );
-  }
-}
-
-class RecipeWidget extends StatelessWidget {
-  const RecipeWidget({super.key});
+class RecipeElementWidget extends ConsumerWidget {
+  const RecipeElementWidget({required this.index, super.key});
+  final int index;
 
   static Widget create(
-    BuildContext context,
     int index,
-    RecipesListService recipesListService,
   ) {
-    return ChangeNotifierProvider(
-      create: (context) => _RecipeViewModel(
-        index: index,
-        recipesListService: recipesListService,
-      ),
-      child: const RecipeWidget(),
+    return ProviderScope(
+      overrides: [
+        recipeElementControllerProvider.overrideWith(
+          (ref, i) => RecipeElementController(
+            index: i,
+            recipeElementService: ref.watch(recipeElementServiceProvider),
+          ),
+        ),
+      ],
+      child: RecipeElementWidget(index: index),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
-    final recipe = context.read<_RecipeViewModel>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(recipeElementControllerProvider(index));
     return Container(
       margin: const EdgeInsets.only(
         left: 16.0,
@@ -80,9 +48,9 @@ class RecipeWidget extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            'assets/images/${recipe.state.img}',
+            'assets/images/${controller.state.img}',
             errorBuilder: (context, error, stackTrace) => Text(
-                "An error occured while\nloading the image!\nThere're no image in\nassets with name:\n${recipe.state.img}"),
+                "An error occured while\nloading the image!\nThere're no image in\nassets with name:\n${controller.state.img}"),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -92,7 +60,7 @@ class RecipeWidget extends StatelessWidget {
                 const SizedBox(height: 30),
                 Flexible(
                   child: Text(
-                    recipe.state.title,
+                    controller.state.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: const TextStyle(
@@ -107,7 +75,7 @@ class RecipeWidget extends StatelessWidget {
                     const Icon(Icons.schedule),
                     const SizedBox(width: 11),
                     Text(
-                      recipe.state.time,
+                      controller.state.time,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Color.fromRGBO(46, 204, 113, 1),

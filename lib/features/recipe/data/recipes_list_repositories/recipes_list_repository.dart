@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:hw2/features/recipes_list/domain/recipe.dart';
+import 'package:hw2/features/recipe/domain/recipe.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class RecipesListDataProvider {
+part 'recipes_list_repository.g.dart';
+
+class RecipesListRepository {
   Future<List> _readJson() async {
     final String recipes = await rootBundle.loadString('assets/recipes.json');
     return json.decode(recipes)['recipes'];
@@ -24,4 +27,9 @@ class RecipesListDataProvider {
     }
     return recipes;
   }
+}
+
+@riverpod
+RecipesListRepository recipesListRepository(RecipesListRepositoryRef ref) {
+  return RecipesListRepository();
 }

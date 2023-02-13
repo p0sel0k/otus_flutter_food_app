@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hw2/features/recipes_list/presentation/recipes_list_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hw2/features/recipe/presentation/recipes_list_page/recipes_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,17 +11,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Рецепты',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-        ).copyWith(
-          secondary: const Color.fromRGBO(46, 204, 113, 1),
+    return ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Рецепты',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue,
+          ).copyWith(
+            secondary: const Color.fromRGBO(46, 204, 113, 1),
+          ),
         ),
+        home: const RecipesListPage(),
       ),
-      home: RecipesListPage.create(),
     );
   }
 }
