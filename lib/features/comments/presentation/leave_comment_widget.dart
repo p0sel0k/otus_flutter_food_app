@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hw2/features/comments/presentation/comment_controller.dart';
-import 'package:hw2/features/comments/presentation/leave_comment_controller.dart';
-// date: formatter.format(DateTime.now()));
 
 class LeaveCommentWidget extends ConsumerStatefulWidget {
   const LeaveCommentWidget({super.key});
@@ -27,7 +25,7 @@ class _AddCommentWidgetState extends ConsumerState<LeaveCommentWidget> {
       date: DateTime.now().toString(),
     );
     textController.clear();
-    ref.read(leaveCommentControllerProvider.notifier).submitComment(comment);
+    ref.read(commentsControllerProvider.notifier).submitComment(comment);
   }
 
   @override

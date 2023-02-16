@@ -30,11 +30,11 @@ class _SystemHash {
 }
 
 String _$CommentsControllerHash() =>
-    r'0b9e99b962075d294c093bd6d6b67bf02e1df195';
+    r'9cd50836b8c3f0dac813fd71ddb8c2cdf8fa0178';
 
 /// See also [CommentsController].
 final commentsControllerProvider =
-    AutoDisposeAsyncNotifierProvider<CommentsController, List<CommentState>>(
+    AutoDisposeNotifierProvider<CommentsController, List<CommentState>>(
   CommentsController.new,
   name: r'commentsControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -42,10 +42,10 @@ final commentsControllerProvider =
       : _$CommentsControllerHash,
 );
 typedef CommentsControllerRef
-    = AutoDisposeAsyncNotifierProviderRef<List<CommentState>>;
+    = AutoDisposeNotifierProviderRef<List<CommentState>>;
 
 abstract class _$CommentsController
-    extends AutoDisposeAsyncNotifier<List<CommentState>> {
+    extends AutoDisposeNotifier<List<CommentState>> {
   @override
-  FutureOr<List<CommentState>> build();
+  List<CommentState> build();
 }

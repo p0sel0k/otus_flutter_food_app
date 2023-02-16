@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hw2/features/comments/presentation/add_comment_widget.dart';
-import 'package:hw2/features/comments/presentation/comments.dart';
+import 'package:hw2/features/comments/presentation/leave_comment_widget.dart';
+import 'package:hw2/features/comments/presentation/comments_widget.dart';
 import 'package:hw2/features/recipe/presentation/recipe_page/recipe_controller.dart';
 import 'package:hw2/features/recipe/presentation/recipe_page/widgets/recipe_header.dart';
 import 'package:hw2/features/recipe/presentation/recipe_page/widgets/recipe_ingredients.dart';

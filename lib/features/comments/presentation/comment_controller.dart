@@ -8,12 +8,20 @@ part 'comment_controller.g.dart';
 @riverpod
 class CommentsController extends _$CommentsController {
   @override
-  FutureOr<List<CommentState>> build() {
-    return ref.watch(commentsServiceProvider).when(
+  List<CommentState> build() {
+    state = ref.watch(commentsServiceProvider).when(
         data: (CommentsService data) =>
             data.comments.map((e) => CommentState.fromModel(e)).toList(),
         error: (error, _) => throw error,
         loading: () => []);
+    return state;
+  }
+
+  void submitComment(CommentState comment) {
+    state = [...state, comment];
+    final commentService = ref.read(commentsServiceProvider);
+    final commentModel = comment.toModel();
+    commentService.whenData((value) => value.addComment(commentModel));
   }
 }
 

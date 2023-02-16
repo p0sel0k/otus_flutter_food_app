@@ -8,15 +8,11 @@ class CommentsWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final comments = ref.watch(commentsControllerProvider);
-    return comments.when(
-      data: (List<CommentState> data) => Padding(
-        padding: const EdgeInsets.only(bottom: 48),
-        child: Column(
-          children: [...data.map((e) => _Comment(comment: e)).toList()],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 48),
+      child: Column(
+        children: [...comments.map((e) => _Comment(comment: e)).toList()],
       ),
-      error: (error, _) => Text('$error'),
-      loading: () => const CircularProgressIndicator(),
     );
   }
 }
