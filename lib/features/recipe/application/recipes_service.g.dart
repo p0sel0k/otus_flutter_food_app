@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipe_element_service.dart';
+part of 'recipes_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,15 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$recipeElementServiceHash() =>
-    r'770589a40a62768c26c4ae76f76f715a0e665f28';
+String _$recipesServiceHash() => r'2a892595e6adf4fd8236ccf000e771fe6c8a7038';
 
-/// See also [recipeElementService].
-final recipeElementServiceProvider = AutoDisposeProvider<RecipeElementService>(
-  recipeElementService,
-  name: r'recipeElementServiceProvider',
+/// See also [recipesService].
+final recipesServiceProvider = AutoDisposeProvider<RecipesService>(
+  recipesService,
+  name: r'recipesServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$recipeElementServiceHash,
+      : _$recipesServiceHash,
 );
-typedef RecipeElementServiceRef = AutoDisposeProviderRef<RecipeElementService>;
+typedef RecipesServiceRef = AutoDisposeProviderRef<RecipesService>;

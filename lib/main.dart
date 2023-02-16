@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'Рецепты',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.green,
           ).copyWith(
             secondary: const Color.fromRGBO(46, 204, 113, 1),
           ),

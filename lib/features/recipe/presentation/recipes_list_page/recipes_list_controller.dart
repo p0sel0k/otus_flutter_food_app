@@ -1,5 +1,5 @@
 import 'package:hw2/features/recipe/domain/recipe.dart';
-import 'package:hw2/features/recipe/application/recipes_list_service.dart';
+import 'package:hw2/features/recipe/application/recipes_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipes_list_controller.g.dart';
@@ -10,6 +10,6 @@ class RecipesListController extends _$RecipesListController {
 
   @override
   FutureOr<List<Recipe>> build() {
-    return ref.watch(recipesListServiceProvider).loadRecipes();
+    return ref.watch(recipesServiceProvider).loadRecipes();
   }
 }

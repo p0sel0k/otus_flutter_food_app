@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipes_list_repository.dart';
+part of 'comment_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,17 +29,23 @@ class _SystemHash {
   }
 }
 
-String _$recipesListRepositoryHash() =>
-    r'079a365732980aef17dba17cfab91b65c6fdb34b';
+String _$CommentsControllerHash() =>
+    r'0b9e99b962075d294c093bd6d6b67bf02e1df195';
 
-/// See also [recipesListRepository].
-final recipesListRepositoryProvider =
-    AutoDisposeProvider<RecipesListRepository>(
-  recipesListRepository,
-  name: r'recipesListRepositoryProvider',
+/// See also [CommentsController].
+final commentsControllerProvider =
+    AutoDisposeAsyncNotifierProvider<CommentsController, List<CommentState>>(
+  CommentsController.new,
+  name: r'commentsControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$recipesListRepositoryHash,
+      : _$CommentsControllerHash,
 );
-typedef RecipesListRepositoryRef
-    = AutoDisposeProviderRef<RecipesListRepository>;
+typedef CommentsControllerRef
+    = AutoDisposeAsyncNotifierProviderRef<List<CommentState>>;
+
+abstract class _$CommentsController
+    extends AutoDisposeAsyncNotifier<List<CommentState>> {
+  @override
+  FutureOr<List<CommentState>> build();
+}

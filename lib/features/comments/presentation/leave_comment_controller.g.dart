@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipes_list_service.dart';
+part of 'leave_comment_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,15 +29,21 @@ class _SystemHash {
   }
 }
 
-String _$recipesListServiceHash() =>
-    r'457e0c7ea052ee8d901c9cf582de3f8f5717ac35';
+String _$LeaveCommentControllerHash() =>
+    r'038a837cd4d16a0c28f5a3df388712086b40d67a';
 
-/// See also [recipesListService].
-final recipesListServiceProvider = AutoDisposeProvider<RecipesListService>(
-  recipesListService,
-  name: r'recipesListServiceProvider',
+/// See also [LeaveCommentController].
+final leaveCommentControllerProvider =
+    AutoDisposeNotifierProvider<LeaveCommentController, void>(
+  LeaveCommentController.new,
+  name: r'leaveCommentControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$recipesListServiceHash,
+      : _$LeaveCommentControllerHash,
 );
-typedef RecipesListServiceRef = AutoDisposeProviderRef<RecipesListService>;
+typedef LeaveCommentControllerRef = AutoDisposeNotifierProviderRef<void>;
+
+abstract class _$LeaveCommentController extends AutoDisposeNotifier<void> {
+  @override
+  void build();
+}

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipes_list_controller.dart';
+part of 'recipes_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,23 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$RecipesListControllerHash() =>
-    r'b0879c2c9a969e29d950d9709a66ba06e5928ad6';
+String _$recipesRepositoryHash() => r'dabdac2a36d4e38cda567aa3a572ba35420b4b3d';
 
-/// See also [RecipesListController].
-final recipesListControllerProvider =
-    AutoDisposeAsyncNotifierProvider<RecipesListController, List<Recipe>>(
-  RecipesListController.new,
-  name: r'recipesListControllerProvider',
+/// See also [recipesRepository].
+final recipesRepositoryProvider = AutoDisposeProvider<RecipesRepository>(
+  recipesRepository,
+  name: r'recipesRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$RecipesListControllerHash,
+      : _$recipesRepositoryHash,
 );
-typedef RecipesListControllerRef
-    = AutoDisposeAsyncNotifierProviderRef<List<Recipe>>;
-
-abstract class _$RecipesListController
-    extends AutoDisposeAsyncNotifier<List<Recipe>> {
-  @override
-  FutureOr<List<Recipe>> build();
-}
+typedef RecipesRepositoryRef = AutoDisposeProviderRef<RecipesRepository>;

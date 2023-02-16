@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipe_element_repository.dart';
+part of 'comments_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,17 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$recipeElementRepositoryHash() =>
-    r'a13d796162807d1041a020e28ca61b4dbb7192f7';
+String _$commentsServiceHash() => r'ebdab3d55ec2737933a7f75371cee1b6c1d96de4';
 
-/// See also [recipeElementRepository].
-final recipeElementRepositoryProvider =
-    AutoDisposeProvider<RecipeElementRepository>(
-  recipeElementRepository,
-  name: r'recipeElementRepositoryProvider',
+/// See also [commentsService].
+final commentsServiceProvider = AutoDisposeFutureProvider<CommentsService>(
+  commentsService,
+  name: r'commentsServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$recipeElementRepositoryHash,
+      : _$commentsServiceHash,
 );
-typedef RecipeElementRepositoryRef
-    = AutoDisposeProviderRef<RecipeElementRepository>;
+typedef CommentsServiceRef = AutoDisposeFutureProviderRef<CommentsService>;
