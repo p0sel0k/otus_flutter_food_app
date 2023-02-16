@@ -3,5 +3,5 @@
 A new Flutter educational project.
 
 Todos:
-- [ ] Change Proveder on Riverpod
-- [ ] Add DI
+- [x] Change Proveder on Riverpod
+- [x] Add DI
