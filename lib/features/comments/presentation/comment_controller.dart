@@ -18,10 +18,10 @@ class CommentsController extends _$CommentsController {
   }
 
   void submitComment(CommentState comment) {
-    state = [...state, comment];
     final commentService = ref.read(commentsServiceProvider);
     final commentModel = comment.toModel();
     commentService.whenData((value) => value.addComment(commentModel));
+    state = [...state, CommentState.fromModel(commentModel)];
   }
 }
 
