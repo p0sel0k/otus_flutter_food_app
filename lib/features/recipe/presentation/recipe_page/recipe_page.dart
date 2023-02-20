@@ -58,8 +58,9 @@ class RecipeListView extends StatelessWidget {
         ),
         CookingSteps(steps: recipe.steps),
         const SizedBox(height: 32),
-        const LeaveCommentWidget(),
+        const Divider(color: Color.fromRGBO(121, 118, 118, 1)),
         const CommentsWidget(),
+        const LeaveCommentWidget(),
       ],
     );
   }

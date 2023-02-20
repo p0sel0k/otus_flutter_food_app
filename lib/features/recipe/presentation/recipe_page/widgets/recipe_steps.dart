@@ -28,7 +28,7 @@ class CookingSteps extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          ...showSeps(steps),
+          ...showSteps(steps),
           Center(
             child: InkWell(
               onTap: () {},
@@ -59,14 +59,14 @@ class CookingSteps extends StatelessWidget {
 class _Step extends StatefulWidget {
   final int stepNumber;
   final CustomRecord description;
-  _Step({Key? key, required this.description, required this.stepNumber})
+  const _Step({Key? key, required this.description, required this.stepNumber})
       : super(key: key);
 
   @override
-  __StepState createState() => __StepState();
+  _StepState createState() => _StepState();
 }
 
-class __StepState extends State<_Step> {
+class _StepState extends State<_Step> {
   bool isChecked = false;
   double scale = 1.0;
 
@@ -153,7 +153,7 @@ class __StepState extends State<_Step> {
   }
 }
 
-List<Widget> showSeps(List<CustomRecord> steps) {
+List<Widget> showSteps(List<CustomRecord> steps) {
   int index = 0;
   return steps.map((e) {
     index++;

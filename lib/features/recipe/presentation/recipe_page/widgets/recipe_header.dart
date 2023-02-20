@@ -7,6 +7,7 @@ class RecipeHeader extends StatelessWidget {
   final String time;
 
   const RecipeHeader({
+    super.key,
     required this.title,
     required this.id,
     required this.time,
@@ -21,6 +22,7 @@ class RecipeHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
