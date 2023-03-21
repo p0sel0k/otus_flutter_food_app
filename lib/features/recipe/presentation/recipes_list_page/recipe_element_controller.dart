@@ -23,7 +23,7 @@ class RecipeElementController extends ChangeNotifier {
     required int index,
     required RecipesService recipesService,
   }) {
-    var recipe = recipesService.loadRecipeInfo(index);
+    var recipe = recipesService.getRecipeInfo(index);
     _state = RecipeElementState(
       title: recipe.title,
       img: recipe.imgPath,

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hw2/features/recipe/data/recipe_hive_adapter.dart';
 import 'package:hw2/features/recipe/presentation/recipes_list_page/recipes_list_page.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(RecordHiveAdapter());
+  Hive.registerAdapter(RecipeInfoHiveAdapter());
+  Hive.registerAdapter(RecipeDetailsHiveAdapter());
+  Hive.registerAdapter(RecipeHiveAdapter());
   runApp(const MyApp());
 }
 

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hw2/features/recipe/data/recipes_web_api_repository.dart';
 import 'package:hw2/utils/favorites_widget.dart';
 
-class RecipeHeader extends StatelessWidget {
+class RecipeHeader extends ConsumerWidget {
   final String title;
-  final int id;
+  final String imgPath;
   final String time;
 
   const RecipeHeader({
     super.key,
     required this.title,
-    required this.id,
+    required this.imgPath,
     required this.time,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final connectivity = ref.watch(connectivityProvider);
     return Container(
       padding:
           const EdgeInsets.only(left: 17.0, top: 38.0, bottom: 16, right: 17),
@@ -64,11 +67,19 @@ class RecipeHeader extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Image.asset(
-                  'assets/images/recipe$id.png',
-                  scale: 0.2,
-                  errorBuilder: (context, error, stackTrace) => Text(
-                      "An error occured while\nloading the image!\nThere're no image in\nassets with name:\nrecipe$id.png"),
+                child: connectivity.when(
+                  data: (bool data) => Image.network(imgPath),
+                  error: (Object error, StackTrace stackTrace) => Image.asset(
+                    imgPath,
+                    errorBuilder: (context, error, stackTrace) => Text(
+                        "An error occured while\nloading the image!\nThere're no image in\nassets with name:\n$imgPath"),
+                  ),
+                  loading: () => const SizedBox(
+                    width: 136,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
                 ),
               ),
             ],

@@ -50,7 +50,7 @@ class RecipeListView extends StatelessWidget {
       children: [
         RecipeHeader(
           title: recipe.title,
-          id: id,
+          imgPath: recipe.imgPath,
           time: recipe.time,
         ),
         Ingredients(

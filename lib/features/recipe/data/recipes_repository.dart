@@ -1,27 +1,33 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:hw2/features/recipe/data/abstract_recipes_repository.dart';
+import 'package:hw2/features/recipe/data/recipe_hive_adapter.dart';
 import 'package:hw2/features/recipe/domain/recipe.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipes_repository.g.dart';
 
 class RecipesRepository implements BaseRecipesRepository {
-  Future<List> _readJson() async {
-    final String recipes = await rootBundle.loadString('assets/recipes.json');
-    return json.decode(recipes)['recipes'];
-  }
-
   @override
   Future<List<Recipe>> load() async {
-    var recipesJson = await _readJson();
     List<Recipe> recipes = [];
-    for (var i = 0; i < recipesJson.length; i++) {
-      Map<String, Object?> curr = recipesJson[i];
-      recipes.add(Recipe.fromJson(curr));
+    final box = await Hive.openBox<RecipeHive>('recipes');
+    for (final key in box.keys) {
+      final recipeHive = box.get(key);
+      if (recipeHive == null) {
+        throw 'Hive Error! Key does not exist';
+      }
+      recipes.add(recipeHive.intoRecipe());
     }
     return recipes;
+  }
+
+  Future<Recipe> loadNamed(String name) async {
+    final box = await Hive.openBox<RecipeHive>('recipes');
+    final recipe = box.get(name)?.intoRecipe();
+    if (recipe == null) {
+      throw '[RecipesRepository]: There are no recipe with name: $name';
+    }
+    return recipe;
   }
 }
 

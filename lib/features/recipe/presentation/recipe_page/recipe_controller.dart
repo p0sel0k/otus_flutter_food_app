@@ -10,7 +10,7 @@ class RecipeController extends _$RecipeController {
   @override
   FutureOr<RecipeState> build(int index) {
     return RecipeState.fromModel(
-        ref.watch(recipesServiceProvider).loadRecipe(index));
+        ref.watch(recipesServiceProvider).getRecipe(index));
   }
 }
 

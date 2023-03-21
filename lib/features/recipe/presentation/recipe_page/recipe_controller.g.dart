@@ -6,7 +6,7 @@ part of 'recipe_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// ignore_for_file: avoid_private_typedef_functions, non_constant_identifier_names, subtype_of_sealed_class, invalid_use_of_internal_member, unused_element, constant_identifier_names, unnecessary_raw_strings, library_private_types_in_public_api
+String _$recipeControllerHash() => r'd7365adbc88d64721f5eb8d044b3a2d9524dfea6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,21 +29,74 @@ class _SystemHash {
   }
 }
 
-String _$RecipeControllerHash() => r'0cc1df6e65684b4ebebcd4a44f5d71e8b5ea0cea';
+abstract class _$RecipeController
+    extends BuildlessAutoDisposeAsyncNotifier<RecipeState> {
+  late final int index;
+
+  FutureOr<RecipeState> build(
+    int index,
+  );
+}
+
+/// See also [RecipeController].
+@ProviderFor(RecipeController)
+const recipeControllerProvider = RecipeControllerFamily();
+
+/// See also [RecipeController].
+class RecipeControllerFamily extends Family<AsyncValue<RecipeState>> {
+  /// See also [RecipeController].
+  const RecipeControllerFamily();
+
+  /// See also [RecipeController].
+  RecipeControllerProvider call(
+    int index,
+  ) {
+    return RecipeControllerProvider(
+      index,
+    );
+  }
+
+  @override
+  RecipeControllerProvider getProviderOverride(
+    covariant RecipeControllerProvider provider,
+  ) {
+    return call(
+      provider.index,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'recipeControllerProvider';
+}
 
 /// See also [RecipeController].
 class RecipeControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
     RecipeController, RecipeState> {
+  /// See also [RecipeController].
   RecipeControllerProvider(
     this.index,
-  ) : super(
+  ) : super.internal(
           () => RecipeController()..index = index,
           from: recipeControllerProvider,
           name: r'recipeControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$RecipeControllerHash,
+                  : _$recipeControllerHash,
+          dependencies: RecipeControllerFamily._dependencies,
+          allTransitiveDependencies:
+              RecipeControllerFamily._allTransitiveDependencies,
         );
 
   final int index;
@@ -63,55 +116,11 @@ class RecipeControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
   @override
   FutureOr<RecipeState> runNotifierBuild(
-    covariant _$RecipeController notifier,
+    covariant RecipeController notifier,
   ) {
     return notifier.build(
       index,
     );
   }
 }
-
-typedef RecipeControllerRef = AutoDisposeAsyncNotifierProviderRef<RecipeState>;
-
-/// See also [RecipeController].
-final recipeControllerProvider = RecipeControllerFamily();
-
-class RecipeControllerFamily extends Family<AsyncValue<RecipeState>> {
-  RecipeControllerFamily();
-
-  RecipeControllerProvider call(
-    int index,
-  ) {
-    return RecipeControllerProvider(
-      index,
-    );
-  }
-
-  @override
-  AutoDisposeAsyncNotifierProviderImpl<RecipeController, RecipeState>
-      getProviderOverride(
-    covariant RecipeControllerProvider provider,
-  ) {
-    return call(
-      provider.index,
-    );
-  }
-
-  @override
-  List<ProviderOrFamily>? get allTransitiveDependencies => null;
-
-  @override
-  List<ProviderOrFamily>? get dependencies => null;
-
-  @override
-  String? get name => r'recipeControllerProvider';
-}
-
-abstract class _$RecipeController
-    extends BuildlessAutoDisposeAsyncNotifier<RecipeState> {
-  late final int index;
-
-  FutureOr<RecipeState> build(
-    int index,
-  );
-}
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
