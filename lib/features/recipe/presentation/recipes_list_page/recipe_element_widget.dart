@@ -29,7 +29,6 @@ class RecipeElementWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(recipeElementControllerProvider(index));
     final connectivity = ref.watch(connectivityProvider);
-    print(controller.state.img);
     return InkWell(
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (_) => RecipePage(id: index))),
@@ -55,14 +54,11 @@ class RecipeElementWidget extends ConsumerWidget {
         child: Row(
           children: [
             connectivity.when(
-              data: (bool data) => Image.network(
-                '${controller.state.img}/preview',
-              ),
-              error: (Object error, StackTrace stackTrace) => Image.asset(
-                'assets/images/${controller.state.img}',
-                errorBuilder: (context, error, stackTrace) => Text(
-                    "An error occured while\nloading the image!\nThere're no image in\nassets with name:\n${controller.state.img}"),
-              ),
+              data: (bool data) => data
+                  ? Image.network('${controller.state.imgPath}/preview')
+                  : Image.memory(controller.state.base64),
+              error: (Object error, StackTrace stackTrace) =>
+                  Image.memory(controller.state.base64),
               loading: () => const SizedBox(
                 width: 136,
                 child: Center(

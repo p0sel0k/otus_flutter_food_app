@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hw2/features/recipe/domain/recipe.dart';
+import 'package:hw2/utils/constants.dart';
 import 'package:hw2/utils/record.dart';
 
 part 'recipe_hive_adapter.g.dart';
@@ -32,18 +33,29 @@ class RecipeInfoHive {
   final String time;
   @HiveField(2)
   final String imgPath;
+  @HiveField(3, defaultValue: baseImg)
+  final String base64Img;
 
   RecipeInfoHive({
+    required this.base64Img,
     required this.title,
     required this.time,
     required this.imgPath,
   });
 
-  factory RecipeInfoHive.fromRecipeInfo(RecipeInfo r) =>
-      RecipeInfoHive(title: r.title, time: r.time, imgPath: r.imgPath);
+  factory RecipeInfoHive.fromRecipeInfo(RecipeInfo r) => RecipeInfoHive(
+        title: r.title,
+        time: r.time,
+        imgPath: r.imgPath,
+        base64Img: r.base64Img,
+      );
 
-  RecipeInfo intoInfo() =>
-      RecipeInfo(time: time, title: title, imgPath: imgPath);
+  RecipeInfo intoInfo() => RecipeInfo(
+        time: time,
+        title: title,
+        imgPath: imgPath,
+        base64Img: base64Img,
+      );
 }
 
 @HiveType(typeId: 3)

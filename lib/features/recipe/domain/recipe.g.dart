@@ -10,14 +10,16 @@ _$_RecipeInfo _$$_RecipeInfoFromJson(Map<String, dynamic> json) =>
     _$_RecipeInfo(
       title: json['title'] as String,
       time: json['time'] as String,
-      imgPath: json['image'] as String? ?? '',
+      imgPath: json['imgPath'] as String? ?? '',
+      base64Img: json['base64Img'] as String? ?? baseImg,
     );
 
 Map<String, dynamic> _$$_RecipeInfoToJson(_$_RecipeInfo instance) =>
     <String, dynamic>{
       'title': instance.title,
       'time': instance.time,
-      'image': instance.imgPath,
+      'imgPath': instance.imgPath,
+      'base64Img': instance.base64Img,
     };
 
 _$_RecipeDetails _$$_RecipeDetailsFromJson(Map<String, dynamic> json) =>

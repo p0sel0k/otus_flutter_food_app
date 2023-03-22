@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hw2/features/recipe/domain/recipe.dart';
+import 'package:hw2/utils/constants.dart';
 import 'package:hw2/utils/record.dart';
 
 part 'recipe_dto.g.dart';
@@ -61,7 +62,10 @@ class RecipeDto with _$RecipeDto {
 Recipe dtoToRecipe(RecipeDto dto) {
   const int cookingTime = 45;
   final info = RecipeInfo(
-      title: dto.strMeal, time: '$cookingTime min', imgPath: dto.strMealThumb);
+      title: dto.strMeal,
+      time: '$cookingTime min',
+      imgPath: dto.strMealThumb,
+      base64Img: baseImg);
   final details = RecipeDetails(
       stepsWithDescriprion: _getSteps(dto, cookingTime),
       ingredients: _getNonNullableIngredients(dto));

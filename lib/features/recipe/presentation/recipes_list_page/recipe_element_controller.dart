@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hw2/features/recipe/application/recipes_service.dart';
@@ -5,12 +7,14 @@ import 'package:hw2/features/recipe/application/recipes_service.dart';
 class RecipeElementState {
   final String title;
   final String time;
-  final String img;
+  final String imgPath;
+  final Uint8List base64;
 
   RecipeElementState({
     required this.title,
     required this.time,
-    required this.img,
+    required this.imgPath,
+    required this.base64,
   });
 }
 
@@ -26,8 +30,9 @@ class RecipeElementController extends ChangeNotifier {
     var recipe = recipesService.getRecipeInfo(index);
     _state = RecipeElementState(
       title: recipe.title,
-      img: recipe.imgPath,
+      imgPath: recipe.imgPath,
       time: recipe.time,
+      base64: Uint8List.fromList(recipe.base64Img.codeUnits),
     );
   }
 }

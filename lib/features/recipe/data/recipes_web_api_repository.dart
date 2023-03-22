@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -22,13 +22,16 @@ class RecipesWebApiRepository implements BaseRecipesRepository {
     try {
       response = await dio
           .get('https://www.themealdb.com/api/json/v1/1/search.php?f=a');
-    } on DioError catch (e) {
-      debugPrint(e.toString());
+    } on DioError catch (_) {
       rethrow;
+    } catch (e) {
+      throw DioError.connectionError(
+          reason: e.toString(), requestOptions: RequestOptions());
     }
     final List<dynamic> recipesJson = response.data['meals'];
     for (var rec in recipesJson) {
-      recipes.add(dtoToRecipe(RecipeDto.fromJson(rec)));
+      final recipe = dtoToRecipe(RecipeDto.fromJson(rec));
+      recipes.add(recipe);
       if (recipes.length > 10) break;
     }
     await save(recipes);
@@ -38,8 +41,21 @@ class RecipesWebApiRepository implements BaseRecipesRepository {
   Future<void> save(List<Recipe> recipes) async {
     final box = await Hive.openBox<RecipeHive>('recipes');
     for (final recipe in recipes) {
-      box.put(recipe.info.title, RecipeHive.fromRecipe(recipe));
+      final base65Img = await _imageToBytes(recipe.info.imgPath);
+      final newRecipe =
+          recipe.copyWith(info: recipe.info.copyWith(base64Img: base65Img));
+      box.put(recipe.info.title, RecipeHive.fromRecipe(newRecipe));
     }
+  }
+
+  Future<String> _imageToBytes(String url) async {
+    final response =
+        await dio.get(url, options: Options(responseType: ResponseType.bytes));
+    if (response.statusCode == 200) {
+      final bytes = response.data as Uint8List;
+      return String.fromCharCodes(bytes);
+    }
+    throw "Wrong URL: '$url'! Can't load an image.";
   }
 }
 

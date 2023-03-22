@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hw2/features/recipe/data/recipes_web_api_repository.dart';
@@ -6,12 +8,14 @@ import 'package:hw2/utils/favorites_widget.dart';
 class RecipeHeader extends ConsumerWidget {
   final String title;
   final String imgPath;
+  final Uint8List base64;
   final String time;
 
   const RecipeHeader({
     super.key,
     required this.title,
     required this.imgPath,
+    required this.base64,
     required this.time,
   });
 
@@ -68,12 +72,10 @@ class RecipeHeader extends ConsumerWidget {
             children: [
               Expanded(
                 child: connectivity.when(
-                  data: (bool data) => Image.network(imgPath),
-                  error: (Object error, StackTrace stackTrace) => Image.asset(
-                    imgPath,
-                    errorBuilder: (context, error, stackTrace) => Text(
-                        "An error occured while\nloading the image!\nThere're no image in\nassets with name:\n$imgPath"),
-                  ),
+                  data: (bool data) =>
+                      data ? Image.network(imgPath) : Image.memory(base64),
+                  error: (Object error, StackTrace stackTrace) =>
+                      Image.memory(base64),
                   loading: () => const SizedBox(
                     width: 136,
                     child: Center(

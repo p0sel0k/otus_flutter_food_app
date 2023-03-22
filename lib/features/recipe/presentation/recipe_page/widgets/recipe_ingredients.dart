@@ -3,7 +3,7 @@ import 'package:hw2/utils/record.dart';
 
 class Ingredients extends StatelessWidget {
   final List<CustomRecord> ingredients;
-  const Ingredients({required this.ingredients});
+  const Ingredients({super.key, required this.ingredients});
 
   @override
   Widget build(BuildContext context) {

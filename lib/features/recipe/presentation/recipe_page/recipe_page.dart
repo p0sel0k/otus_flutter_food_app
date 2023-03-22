@@ -52,6 +52,7 @@ class RecipeListView extends StatelessWidget {
           title: recipe.title,
           imgPath: recipe.imgPath,
           time: recipe.time,
+          base64: recipe.base64,
         ),
         Ingredients(
           ingredients: recipe.ingredients,

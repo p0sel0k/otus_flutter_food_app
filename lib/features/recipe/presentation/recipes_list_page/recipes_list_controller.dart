@@ -6,8 +6,6 @@ part 'recipes_list_controller.g.dart';
 
 @riverpod
 class RecipesListController extends _$RecipesListController {
-  // final _recipesListService = RecipesListService();
-
   @override
   FutureOr<List<Recipe>> build() {
     return ref.watch(recipesServiceProvider).loadRecipes();

@@ -14,7 +14,7 @@ class RecipesListPage extends ConsumerWidget {
       body: SafeArea(
         child: state.when(
           data: (data) => buildListView(data),
-          loading: () => const CircularProgressIndicator(),
+          loading: () => const Center(child: CircularProgressIndicator()),
           error: (Object error, StackTrace stackTrace) =>
               Text('error occured: $error'),
         ),

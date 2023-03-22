@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hw2/utils/constants.dart';
 import 'package:hw2/utils/record.dart';
 
 part 'recipe.freezed.dart';
@@ -10,7 +11,8 @@ class RecipeInfo with _$RecipeInfo {
   const factory RecipeInfo({
     required String title,
     required String time,
-    @JsonKey(name: 'image') @Default('') String imgPath,
+    @Default('') String imgPath,
+    @Default(baseImg) String base64Img,
   }) = _RecipeInfo;
 
   factory RecipeInfo.fromJson(Map<String, Object?> json) =>

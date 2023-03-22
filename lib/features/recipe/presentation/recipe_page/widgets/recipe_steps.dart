@@ -4,7 +4,7 @@ import 'package:hw2/utils/record.dart';
 class CookingSteps extends StatelessWidget {
   final List<CustomRecord> steps;
 
-  const CookingSteps({required this.steps});
+  const CookingSteps({super.key, required this.steps});
 
   @override
   Widget build(BuildContext context) {

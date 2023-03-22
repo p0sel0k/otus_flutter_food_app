@@ -54,6 +54,9 @@ class RecipeInfoHiveAdapter extends TypeAdapter<RecipeInfoHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RecipeInfoHive(
+      base64Img: fields[3] == null
+          ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P5AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'
+          : fields[3] as String,
       title: fields[0] as String,
       time: fields[1] as String,
       imgPath: fields[2] as String,
@@ -63,13 +66,15 @@ class RecipeInfoHiveAdapter extends TypeAdapter<RecipeInfoHive> {
   @override
   void write(BinaryWriter writer, RecipeInfoHive obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.time)
       ..writeByte(2)
-      ..write(obj.imgPath);
+      ..write(obj.imgPath)
+      ..writeByte(3)
+      ..write(obj.base64Img);
   }
 
   @override
