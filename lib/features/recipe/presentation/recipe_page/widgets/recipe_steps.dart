@@ -66,9 +66,22 @@ class _Step extends StatefulWidget {
   _StepState createState() => _StepState();
 }
 
-class _StepState extends State<_Step> {
+class _StepState extends State<_Step> with SingleTickerProviderStateMixin {
+  late AnimationController controller;
   bool isChecked = false;
   double scale = 1.0;
+
+  @override
+  initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+      value: 1.0,
+      lowerBound: 1.0,
+      upperBound: 1.25,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +89,9 @@ class _StepState extends State<_Step> {
       onTapDown: (_) {
         isChecked = !isChecked;
         isChecked ? scale = 0.95 : scale = 1.0;
+        controller.forward().then((value) => controller.reverse());
         setState(() {});
       },
-      // onTapUp: (_) {
-      //   Future.delayed(const Duration(milliseconds: 200), () {
-      //     scale = 1.0;
-      //     setState(() {});
-      //   });
-      // },
       child: AnimatedContainer(
         height: 120 * scale,
         padding: const EdgeInsets.only(left: 24, right: 22),
@@ -110,15 +118,12 @@ class _StepState extends State<_Step> {
             ),
             const SizedBox(width: 29),
             Expanded(
-              // flex: 4,
               child: Text(
                 widget.description.first,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 6,
                 style: TextStyle(
                   fontSize: 12,
-
-                  // fontWeight: FontWeight.bold,
                   color: !isChecked
                       ? Colors.grey
                       : const Color.fromRGBO(22, 89, 50, 1),
@@ -129,16 +134,18 @@ class _StepState extends State<_Step> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (_) {},
-                  activeColor: const Color.fromRGBO(22, 89, 50, 1),
+                ScaleTransition(
+                  scale: controller,
+                  child: Checkbox(
+                    value: isChecked,
+                    onChanged: (_) {},
+                    activeColor: const Color.fromRGBO(22, 89, 50, 1),
+                  ),
                 ),
                 Text(
                   widget.description.second,
                   style: TextStyle(
                     fontSize: 12,
-                    // fontWeight: FontWeight.bold,
                     color: !isChecked
                         ? Colors.grey
                         : const Color.fromRGBO(22, 89, 50, 1),
@@ -164,3 +171,39 @@ List<Widget> showSteps(List<CustomRecord> steps) {
     );
   }).toList();
 }
+
+// class _TransitionCheckBox extends StatefulWidget {
+//   final bool isChecked;
+//   const _TransitionCheckBox({required this.isChecked});
+
+//   @override
+//   State<_TransitionCheckBox> createState() => _TransitionCheckBoxState();
+// }
+
+// class _TransitionCheckBoxState extends State<_TransitionCheckBox>
+//     with TickerProviderStateMixin {
+//   late AnimationController controller;
+//   late Animation<double> animation;
+
+//   @override
+//   initState() {
+//     super.initState();
+//     // animation = Tween<double>(begin: 1.0, end: 1.2).animate(controller);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// Animation<double> _animationController(TickerProviderStateMixin tmp) {
+  // animationController.repeat();
+  // return CurvedAnimation(
+  //   parent: animationController,
+  //   curve: Curves.easeInOut,
+  // )..addStatusListener((status) => status == AnimationStatus.completed
+  //     ? animationController.reverse()
+  //     : animationController.forward());
+  // return Tween<double>(begin: 1.0, end: 1.2).animate(animationController);
+// }
