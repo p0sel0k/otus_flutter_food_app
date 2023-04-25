@@ -2,25 +2,30 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hw2/features/recipe/data/recipes_web_api_repository.dart';
 import 'package:hw2/utils/favorites_widget.dart';
+import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 
 class RecipeHeader extends ConsumerWidget {
   final String title;
   final String imgPath;
-  final Uint8List base64;
+  final Uint8List cachedImg;
   final String time;
+  final int id;
 
   const RecipeHeader({
     super.key,
+    required this.id,
     required this.title,
     required this.imgPath,
-    required this.base64,
+    required this.cachedImg,
     required this.time,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const color = Color.fromRGBO(22, 89, 50, 1);
     final connectivity = ref.watch(connectivityProvider);
     return Container(
       padding:
@@ -62,7 +67,7 @@ class RecipeHeader extends ConsumerWidget {
                   ),
                 ],
               ),
-              const FavoriteIconButton(),
+              FavoriteIconButton(id: id),
             ],
           ),
           const SizedBox(
@@ -71,21 +76,55 @@ class RecipeHeader extends ConsumerWidget {
           Row(
             children: [
               Expanded(
-                child: connectivity.when(
-                  data: (bool data) =>
-                      data ? Image.network(imgPath) : Image.memory(base64),
-                  error: (Object error, StackTrace stackTrace) =>
-                      Image.memory(base64),
-                  loading: () => const SizedBox(
-                    width: 136,
-                    child: Center(
-                      child: CircularProgressIndicator(),
+                child: InkWell(
+                  onTap: () {
+                    SwipeImageGallery(context: context, children: [
+                      Image.network(imgPath),
+                      Image.memory(cachedImg),
+                    ]).show();
+                  },
+                  child: connectivity.when(
+                    data: (bool data) =>
+                        data ? Image.network(imgPath) : Image.memory(cachedImg),
+                    error: (Object error, StackTrace stackTrace) =>
+                        Image.memory(cachedImg),
+                    loading: () => const SizedBox(
+                      width: 136,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
                   ),
                 ),
               ),
             ],
           ),
+          const SizedBox(
+            height: 15,
+          ),
+          // Center(
+          //   child: InkWell(
+          //     onTap: () => context.push('/recipe/$id/camera'),
+          //     child: Container(
+          //       width: 232,
+          //       height: 48,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(25),
+          //         border: Border.all(color: color, width: 3),
+          //       ),
+          //       child: const Center(
+          //         child: Text(
+          //           'Добавить фото',
+          //           style: TextStyle(
+          //             color: color,
+          //             fontSize: 16,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

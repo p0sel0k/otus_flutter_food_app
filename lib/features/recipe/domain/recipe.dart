@@ -13,6 +13,7 @@ class RecipeInfo with _$RecipeInfo {
     required String time,
     @Default('') String imgPath,
     @Default(baseImg) String base64Img,
+    @Default(false) bool isFavorite,
   }) = _RecipeInfo;
 
   factory RecipeInfo.fromJson(Map<String, Object?> json) =>

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hw2/features/comments/presentation/comment_controller.dart';
 
 class LeaveCommentWidget extends ConsumerStatefulWidget {
-  const LeaveCommentWidget({super.key});
+  final int id;
+  const LeaveCommentWidget({super.key, required this.id});
 
   @override
   ConsumerState<LeaveCommentWidget> createState() => _AddCommentWidgetState();
@@ -18,14 +20,18 @@ class _AddCommentWidgetState extends ConsumerState<LeaveCommentWidget> {
     super.dispose();
   }
 
-  void addComment() {
+  void addComment(int recipeId) {
     final comment = CommentState(
       comment: textController.text,
       username: 'anonymous',
       date: DateTime.now().toString(),
+      img: '',
+      recipeId: recipeId,
     );
     textController.clear();
-    ref.read(commentsControllerProvider.notifier).submitComment(comment);
+    ref
+        .read(commentsControllerProvider(widget.id).notifier)
+        .submitComment(comment, widget.id);
   }
 
   @override
@@ -34,12 +40,14 @@ class _AddCommentWidgetState extends ConsumerState<LeaveCommentWidget> {
       padding: const EdgeInsets.only(left: 16, top: 13, right: 17, bottom: 14),
       child: TextField(
         controller: textController,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'оставить комментарий',
-          suffixIcon: Icon(Icons.image),
-          border: OutlineInputBorder(),
+          suffixIcon: InkWell(
+              onTap: () => context.push('/recipe/${widget.id}/camera'),
+              child: const Icon(Icons.image)),
+          border: const OutlineInputBorder(),
         ),
-        onSubmitted: (str) => addComment(),
+        onSubmitted: (str) => addComment(widget.id),
       ),
     );
   }

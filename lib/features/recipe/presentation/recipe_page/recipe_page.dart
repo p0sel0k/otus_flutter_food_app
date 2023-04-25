@@ -31,7 +31,7 @@ class RecipePage extends ConsumerWidget {
         ],
       ),
       body: recipe.when(
-          data: (data) => RecipeListView(recipe: data, id: id + 1),
+          data: (data) => RecipeListView(recipe: data, id: id),
           error: (error, _) => Text('error occured: $error'),
           loading: () => const CircularProgressIndicator()),
     ));
@@ -49,10 +49,11 @@ class RecipeListView extends StatelessWidget {
     return ListView(
       children: [
         RecipeHeader(
+          id: id,
           title: recipe.title,
           imgPath: recipe.imgPath,
           time: recipe.time,
-          base64: recipe.base64,
+          cachedImg: recipe.base64,
         ),
         Ingredients(
           ingredients: recipe.ingredients,
@@ -60,8 +61,8 @@ class RecipeListView extends StatelessWidget {
         CookingSteps(steps: recipe.steps),
         const SizedBox(height: 32),
         const Divider(color: Color.fromRGBO(121, 118, 118, 1)),
-        const CommentsWidget(),
-        const LeaveCommentWidget(),
+        CommentsWidget(recipeId: id),
+        LeaveCommentWidget(id: id),
       ],
     );
   }

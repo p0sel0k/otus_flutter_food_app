@@ -14,18 +14,20 @@ class CommentsService {
 
   CommentsService({required this.commentRepository});
 
-  Future<List<Comment>> load() async {
-    _comments.addAll(await commentRepository.load());
+  Future<List<Comment>> load(int recipeId) async {
+    _comments.addAll(await commentRepository.load(recipeId));
     return _comments;
   }
 
   void addComment(Comment comment) {
     _comments.add(comment);
+    commentRepository.save(comment);
   }
 }
 
 @riverpod
-Future<CommentsService> commentsService(CommentsServiceRef ref) async {
+Future<CommentsService> commentsService(
+    CommentsServiceRef ref, int recipeId) async {
   final link = ref.keepAlive();
   Timer? timer;
   ref.onDispose(() {
@@ -42,6 +44,6 @@ Future<CommentsService> commentsService(CommentsServiceRef ref) async {
 
   final service =
       CommentsService(commentRepository: ref.watch(commentRepositoryProvider));
-  await service.load();
+  await service.load(recipeId);
   return service;
 }

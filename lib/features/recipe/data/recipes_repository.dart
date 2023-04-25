@@ -29,6 +29,11 @@ class RecipesRepository implements BaseRecipesRepository {
     }
     return recipe;
   }
+
+  Future<void> save(Recipe recipe) async {
+    final box = await Hive.openBox<RecipeHive>('recipes');
+    await box.put(recipe.info.title, RecipeHive.fromRecipe(recipe));
+  }
 }
 
 @riverpod

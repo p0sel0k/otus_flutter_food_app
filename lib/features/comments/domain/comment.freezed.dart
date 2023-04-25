@@ -23,6 +23,8 @@ mixin _$Comment {
   String get username => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
+  String get img => throw _privateConstructorUsedError;
+  int get recipeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,12 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
-  $Res call({String username, DateTime date, String comment});
+  $Res call(
+      {String username,
+      DateTime date,
+      String comment,
+      String img,
+      int recipeId});
 }
 
 /// @nodoc
@@ -53,6 +60,8 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? username = null,
     Object? date = null,
     Object? comment = null,
+    Object? img = null,
+    Object? recipeId = null,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -67,6 +76,14 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipeId: null == recipeId
+          ? _value.recipeId
+          : recipeId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -78,7 +95,12 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$$_CommentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String username, DateTime date, String comment});
+  $Res call(
+      {String username,
+      DateTime date,
+      String comment,
+      String img,
+      int recipeId});
 }
 
 /// @nodoc
@@ -94,6 +116,8 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? username = null,
     Object? date = null,
     Object? comment = null,
+    Object? img = null,
+    Object? recipeId = null,
   }) {
     return _then(_$_Comment(
       username: null == username
@@ -108,6 +132,14 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipeId: null == recipeId
+          ? _value.recipeId
+          : recipeId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -116,7 +148,11 @@ class __$$_CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   const _$_Comment(
-      {required this.username, required this.date, required this.comment});
+      {required this.username,
+      required this.date,
+      required this.comment,
+      required this.img,
+      required this.recipeId});
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
@@ -127,10 +163,14 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   final DateTime date;
   @override
   final String comment;
+  @override
+  final String img;
+  @override
+  final int recipeId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(username: $username, date: $date, comment: $comment)';
+    return 'Comment(username: $username, date: $date, comment: $comment, img: $img, recipeId: $recipeId)';
   }
 
   @override
@@ -140,7 +180,9 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('type', 'Comment'))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('comment', comment));
+      ..add(DiagnosticsProperty('comment', comment))
+      ..add(DiagnosticsProperty('img', img))
+      ..add(DiagnosticsProperty('recipeId', recipeId));
   }
 
   @override
@@ -151,12 +193,16 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.comment, comment) || other.comment == comment));
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.img, img) || other.img == img) &&
+            (identical(other.recipeId, recipeId) ||
+                other.recipeId == recipeId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, username, date, comment);
+  int get hashCode =>
+      Object.hash(runtimeType, username, date, comment, img, recipeId);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +222,9 @@ abstract class _Comment implements Comment {
   const factory _Comment(
       {required final String username,
       required final DateTime date,
-      required final String comment}) = _$_Comment;
+      required final String comment,
+      required final String img,
+      required final int recipeId}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
@@ -186,6 +234,10 @@ abstract class _Comment implements Comment {
   DateTime get date;
   @override
   String get comment;
+  @override
+  String get img;
+  @override
+  int get recipeId;
   @override
   @JsonKey(ignore: true)
   _$$_CommentCopyWith<_$_Comment> get copyWith =>

@@ -1,24 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipes_service.dart';
+part of 'auth_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipesServiceHash() => r'5f2d5bf65ae3f724ca8dd5dee32b7c29a4ca9bbd';
+String _$authServiceHash() => r'f4a163ea6a468e162480256cb9b4d94c5242675d';
 
-/// See also [recipesService].
-@ProviderFor(recipesService)
-final recipesServiceProvider = AutoDisposeProvider<RecipesService>.internal(
-  recipesService,
-  name: r'recipesServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$recipesServiceHash,
+/// See also [authService].
+@ProviderFor(authService)
+final authServiceProvider = AutoDisposeProvider<AuthService>.internal(
+  authService,
+  name: r'authServiceProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$authServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef RecipesServiceRef = AutoDisposeProviderRef<RecipesService>;
+typedef AuthServiceRef = AutoDisposeProviderRef<AuthService>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
