@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hw2/features/comments/application/comments_service.dart';
 import 'package:hw2/features/comments/domain/comment.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +18,8 @@ class CommentsController extends _$CommentsController {
         loading: () => []);
     return state;
   }
+
+  void addImage() async {}
 
   void submitComment(CommentState comment, int recipeId) {
     final commentService = ref.read(commentsServiceProvider(recipeId));
@@ -58,7 +62,7 @@ class CommentState {
       username: username,
       date: DateTime.parse(date),
       comment: comment,
-      img: '',
+      img: img,
       recipeId: recipeId,
     );
   }

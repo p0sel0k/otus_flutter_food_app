@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hw2/features/comments/data/comment_hive_adapter.dart';
 import 'package:hw2/features/recipe/data/recipe_hive_adapter.dart';
 import 'package:hw2/navigation/router.dart';
+
+import 'features/recipe/data/tflite_repository.dart';
 
 void main() async {
   await _initLocalDB();

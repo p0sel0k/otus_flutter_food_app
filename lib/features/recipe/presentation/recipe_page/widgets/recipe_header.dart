@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hw2/features/comments/application/comments_service.dart';
 import 'package:hw2/features/recipe/data/recipes_web_api_repository.dart';
 import 'package:hw2/utils/favorites_widget.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
@@ -27,6 +27,7 @@ class RecipeHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const color = Color.fromRGBO(22, 89, 50, 1);
     final connectivity = ref.watch(connectivityProvider);
+    final commentsService = ref.read(commentsServiceProvider(id));
     return Container(
       padding:
           const EdgeInsets.only(left: 17.0, top: 38.0, bottom: 16, right: 17),
@@ -78,10 +79,12 @@ class RecipeHeader extends ConsumerWidget {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    SwipeImageGallery(context: context, children: [
-                      Image.network(imgPath),
-                      Image.memory(cachedImg),
-                    ]).show();
+                    commentsService.whenData((value) async =>
+                        SwipeImageGallery(context: context, children: [
+                          Image.network(imgPath),
+                          ...(await commentsImages(value, id)),
+                          // Image.memory(cachedImg),
+                        ]).show());
                   },
                   child: connectivity.when(
                     data: (bool data) =>
@@ -102,31 +105,19 @@ class RecipeHeader extends ConsumerWidget {
           const SizedBox(
             height: 15,
           ),
-          // Center(
-          //   child: InkWell(
-          //     onTap: () => context.push('/recipe/$id/camera'),
-          //     child: Container(
-          //       width: 232,
-          //       height: 48,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(25),
-          //         border: Border.all(color: color, width: 3),
-          //       ),
-          //       child: const Center(
-          //         child: Text(
-          //           'Добавить фото',
-          //           style: TextStyle(
-          //             color: color,
-          //             fontSize: 16,
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
   }
+}
+
+Future<List<Image>> commentsImages(
+  CommentsService service,
+  int id,
+) async {
+  final comments = await service.load(id);
+  return comments
+      .where((comment) => comment.img != '')
+      .map((comment) => Image.memory(Uint8List.fromList(comment.img.codeUnits)))
+      .toList();
 }

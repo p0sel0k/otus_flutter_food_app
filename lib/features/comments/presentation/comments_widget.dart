@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hw2/features/comments/presentation/comment_controller.dart';
@@ -66,6 +68,12 @@ class _Comment extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
+                const SizedBox(height: 12),
+                comment.img != ''
+                    ? Image.memory(
+                        Uint8List.fromList(comment.img.codeUnits),
+                      )
+                    : const SizedBox(),
               ],
             ),
           )
