@@ -27,6 +27,10 @@ class RecipeElementController extends ChangeNotifier {
     required int index,
     required RecipesService recipesService,
   }) {
+    updateRecipe(index, recipesService);
+  }
+
+  void updateRecipe(int index, RecipesService recipesService) {
     var recipe = recipesService.getRecipeInfo(index);
     _state = RecipeElementState(
       title: recipe.title,

@@ -35,8 +35,11 @@ class RecipeInfoHive {
   final String imgPath;
   @HiveField(3, defaultValue: baseImg)
   final String base64Img;
+  @HiveField(4, defaultValue: false)
+  final bool isFavorite;
 
   RecipeInfoHive({
+    required this.isFavorite,
     required this.base64Img,
     required this.title,
     required this.time,
@@ -44,6 +47,7 @@ class RecipeInfoHive {
   });
 
   factory RecipeInfoHive.fromRecipeInfo(RecipeInfo r) => RecipeInfoHive(
+        isFavorite: r.isFavorite,
         title: r.title,
         time: r.time,
         imgPath: r.imgPath,
@@ -55,6 +59,7 @@ class RecipeInfoHive {
         title: title,
         imgPath: imgPath,
         base64Img: base64Img,
+        isFavorite: isFavorite,
       );
 }
 

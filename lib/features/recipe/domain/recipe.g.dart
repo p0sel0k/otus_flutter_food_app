@@ -12,6 +12,7 @@ _$_RecipeInfo _$$_RecipeInfoFromJson(Map<String, dynamic> json) =>
       time: json['time'] as String,
       imgPath: json['imgPath'] as String? ?? '',
       base64Img: json['base64Img'] as String? ?? baseImg,
+      isFavorite: json['isFavorite'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_RecipeInfoToJson(_$_RecipeInfo instance) =>
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$_RecipeInfoToJson(_$_RecipeInfo instance) =>
       'time': instance.time,
       'imgPath': instance.imgPath,
       'base64Img': instance.base64Img,
+      'isFavorite': instance.isFavorite,
     };
 
 _$_RecipeDetails _$$_RecipeDetailsFromJson(Map<String, dynamic> json) =>

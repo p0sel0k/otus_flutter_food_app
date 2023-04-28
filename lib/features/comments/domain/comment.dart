@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hw2/utils/constants.dart';
 
 part 'comment.freezed.dart';
 part 'comment.g.dart';
@@ -10,6 +11,8 @@ class Comment with _$Comment {
     required String username,
     required DateTime date,
     required String comment,
+    required String img,
+    required int recipeId,
   }) = _Comment;
 
   factory Comment.fromJson(Map<String, Object?> json) =>

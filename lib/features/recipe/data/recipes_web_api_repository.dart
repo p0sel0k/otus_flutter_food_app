@@ -44,7 +44,7 @@ class RecipesWebApiRepository implements BaseRecipesRepository {
       final base65Img = await _imageToBytes(recipe.info.imgPath);
       final newRecipe =
           recipe.copyWith(info: recipe.info.copyWith(base64Img: base65Img));
-      box.put(recipe.info.title, RecipeHive.fromRecipe(newRecipe));
+      await box.put(recipe.info.title, RecipeHive.fromRecipe(newRecipe));
     }
   }
 

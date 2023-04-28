@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hw2/features/recipe/application/recipes_service.dart';
 import 'package:hw2/features/recipe/data/recipes_web_api_repository.dart';
-import 'package:hw2/features/recipe/presentation/recipe_page/recipe_page.dart';
 import 'package:hw2/features/recipe/presentation/recipes_list_page/recipe_element_controller.dart';
+
+import '../recipe_page/recipe_controller.dart';
 
 class RecipeElementWidget extends ConsumerWidget {
   const RecipeElementWidget({required this.index, super.key});
@@ -29,9 +31,9 @@ class RecipeElementWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(recipeElementControllerProvider(index));
     final connectivity = ref.watch(connectivityProvider);
+    final recipe = ref.watch(recipeControllerProvider(index));
     return InkWell(
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => RecipePage(id: index))),
+      onTap: () => context.push('/recipe/$index'),
       child: Container(
         margin: const EdgeInsets.only(
           left: 16.0,
@@ -99,6 +101,15 @@ class RecipeElementWidget extends ConsumerWidget {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(width: 23),
+            recipe.when(
+              data: (data) => data.isFavorite
+                  ? Image.asset('assets/icons/fav.png')
+                  : Image.asset('assets/icons/unfav.png'),
+              error: (Object error, StackTrace stackTrace) =>
+                  Image.asset('assets/icons/unfav.png'),
+              loading: () => const CircularProgressIndicator(),
             ),
             const SizedBox(width: 23),
           ],

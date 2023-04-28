@@ -24,6 +24,7 @@ mixin _$RecipeInfo {
   String get time => throw _privateConstructorUsedError;
   String get imgPath => throw _privateConstructorUsedError;
   String get base64Img => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $RecipeInfoCopyWith<$Res> {
           RecipeInfo value, $Res Function(RecipeInfo) then) =
       _$RecipeInfoCopyWithImpl<$Res, RecipeInfo>;
   @useResult
-  $Res call({String title, String time, String imgPath, String base64Img});
+  $Res call(
+      {String title,
+      String time,
+      String imgPath,
+      String base64Img,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -57,6 +63,7 @@ class _$RecipeInfoCopyWithImpl<$Res, $Val extends RecipeInfo>
     Object? time = null,
     Object? imgPath = null,
     Object? base64Img = null,
+    Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -75,6 +82,10 @@ class _$RecipeInfoCopyWithImpl<$Res, $Val extends RecipeInfo>
           ? _value.base64Img
           : base64Img // ignore: cast_nullable_to_non_nullable
               as String,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +98,12 @@ abstract class _$$_RecipeInfoCopyWith<$Res>
       __$$_RecipeInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String time, String imgPath, String base64Img});
+  $Res call(
+      {String title,
+      String time,
+      String imgPath,
+      String base64Img,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -105,6 +121,7 @@ class __$$_RecipeInfoCopyWithImpl<$Res>
     Object? time = null,
     Object? imgPath = null,
     Object? base64Img = null,
+    Object? isFavorite = null,
   }) {
     return _then(_$_RecipeInfo(
       title: null == title
@@ -123,6 +140,10 @@ class __$$_RecipeInfoCopyWithImpl<$Res>
           ? _value.base64Img
           : base64Img // ignore: cast_nullable_to_non_nullable
               as String,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -134,7 +155,8 @@ class _$_RecipeInfo with DiagnosticableTreeMixin implements _RecipeInfo {
       {required this.title,
       required this.time,
       this.imgPath = '',
-      this.base64Img = baseImg});
+      this.base64Img = baseImg,
+      this.isFavorite = false});
 
   factory _$_RecipeInfo.fromJson(Map<String, dynamic> json) =>
       _$$_RecipeInfoFromJson(json);
@@ -149,10 +171,13 @@ class _$_RecipeInfo with DiagnosticableTreeMixin implements _RecipeInfo {
   @override
   @JsonKey()
   final String base64Img;
+  @override
+  @JsonKey()
+  final bool isFavorite;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecipeInfo(title: $title, time: $time, imgPath: $imgPath, base64Img: $base64Img)';
+    return 'RecipeInfo(title: $title, time: $time, imgPath: $imgPath, base64Img: $base64Img, isFavorite: $isFavorite)';
   }
 
   @override
@@ -163,7 +188,8 @@ class _$_RecipeInfo with DiagnosticableTreeMixin implements _RecipeInfo {
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('imgPath', imgPath))
-      ..add(DiagnosticsProperty('base64Img', base64Img));
+      ..add(DiagnosticsProperty('base64Img', base64Img))
+      ..add(DiagnosticsProperty('isFavorite', isFavorite));
   }
 
   @override
@@ -175,12 +201,15 @@ class _$_RecipeInfo with DiagnosticableTreeMixin implements _RecipeInfo {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.imgPath, imgPath) || other.imgPath == imgPath) &&
             (identical(other.base64Img, base64Img) ||
-                other.base64Img == base64Img));
+                other.base64Img == base64Img) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, time, imgPath, base64Img);
+  int get hashCode =>
+      Object.hash(runtimeType, title, time, imgPath, base64Img, isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +230,8 @@ abstract class _RecipeInfo implements RecipeInfo {
       {required final String title,
       required final String time,
       final String imgPath,
-      final String base64Img}) = _$_RecipeInfo;
+      final String base64Img,
+      final bool isFavorite}) = _$_RecipeInfo;
 
   factory _RecipeInfo.fromJson(Map<String, dynamic> json) =
       _$_RecipeInfo.fromJson;
@@ -214,6 +244,8 @@ abstract class _RecipeInfo implements RecipeInfo {
   String get imgPath;
   @override
   String get base64Img;
+  @override
+  bool get isFavorite;
   @override
   @JsonKey(ignore: true)
   _$$_RecipeInfoCopyWith<_$_RecipeInfo> get copyWith =>

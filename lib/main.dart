@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hw2/features/comments/data/comment_hive_adapter.dart';
 import 'package:hw2/features/recipe/data/recipe_hive_adapter.dart';
-import 'package:hw2/features/recipe/presentation/recipes_list_page/recipes_list_page.dart';
+import 'package:hw2/navigation/router.dart';
+
+import 'features/recipe/data/tflite_repository.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(RecordHiveAdapter());
-  Hive.registerAdapter(RecipeInfoHiveAdapter());
-  Hive.registerAdapter(RecipeDetailsHiveAdapter());
-  Hive.registerAdapter(RecipeHiveAdapter());
-  runApp(const MyApp());
+  await _initLocalDB();
+  runApp(const FoodApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FoodApp extends StatelessWidget {
+  const FoodApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
         title: 'Рецепты',
         theme: ThemeData(
@@ -29,8 +30,16 @@ class MyApp extends StatelessWidget {
             secondary: const Color.fromRGBO(46, 204, 113, 1),
           ),
         ),
-        home: const RecipesListPage(),
       ),
     );
   }
+}
+
+Future<void> _initLocalDB() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(RecordHiveAdapter());
+  Hive.registerAdapter(RecipeInfoHiveAdapter());
+  Hive.registerAdapter(RecipeDetailsHiveAdapter());
+  Hive.registerAdapter(RecipeHiveAdapter());
+  Hive.registerAdapter(CommentHiveAdapter());
 }
